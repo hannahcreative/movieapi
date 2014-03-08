@@ -4,19 +4,33 @@
 	<meta charset="UTF-8">
 	<title>Movie App</title>
 	<link rel="stylesheet" href="style.css">
+	<link href='http://fonts.googleapis.com/css?family=Signika+Negative:400,700' rel='stylesheet' type='text/css'>
+
+
 </head>
 <body>
-	
-	<div class="header">Movie Time!</div>
 
 	<div class="footer"></div>
+
+	<fieldset class= "selectGenres">
+		<legend>Choose your favorite genre:</legend>
+		<input type="radio" id="action" data-movieid="28" name="genre" value="action">
+		<label for="action">Action</label>
+		
+		<input type="radio" id="western" data-movieid="37" name="genre" value="western">
+		<label for="western">Western</label>
+		
+		<input type="radio" id="musical" data-movieid="22" name="genre" value="romance">
+		<label for="musical">Musical</label>
+	</fieldset>
 	
+<div class="resultsList"></div>
+
 	<fieldset class="rateMovie">
 	    <legend>Please rate:</legend>
 	    
 	    <input type="radio" id="star5" name="rating" value="5">
 	    <label for="star5">5 stars</label>
-	    
 	    <input type="radio" id="star4" name="rating" value="4">
 	    <label for="star4">4 stars</label>
 	    <input type="radio" id="star3" name="rating" value="3">

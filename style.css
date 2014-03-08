@@ -14,18 +14,36 @@
  }
 
 body {
-	margin: 0 auto;
+	font-family: 'Signika Negative', sans-serif;
+	background: #ecf0f1;
 }
 
  .movie {
- 	width: 33%;
+ 	width: 16%;
  	display: inline-block;
- 	padding: 20;
  	vertical-align: top;
+ 	margin: 1%;
+ 	border:3px solid #2c3e50;
+ 	height:495px;
  }
+
+ .movie h2 {
+ 	font-size: 100%;
+ 	text-align: center;
+ 	height:33px;
+ }
+
 
  img {
  	max-width: 100%;
+ }
+
+ .resultsList {
+ 	text-align: center;
+ }
+
+ .rateMovie legend {
+ 	padding-top: 8%;
  }
 
 
@@ -69,4 +87,26 @@ body {
 
  .movie .rateMovie {
  	display: block;
+ 	border:0;
+ 	width: 88%;
  }
+
+ fieldset.selectGenres {
+ 	width: 50%;
+ 	text-align: center;
+ 	margin: 0 auto;
+ 	border:0;
+ 	margin-top: 4%;
+
+ }
+
+ .selectGenres legend {
+ 	font-weight: 700;
+ 	font-size: 244%;
+ }
+
+label {
+	font-size: 120%;
+}
+
+

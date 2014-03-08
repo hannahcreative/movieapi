@@ -11,12 +11,21 @@ movieApp.init = function() {
 	movieApp.getSessionId();
 
 	//listen for a click on our star ratings 
-	$('body').on('change', 'input[type=radio]',function(){
+	$('body').on('change', 'input[name*=rating]',function(){
 		var rating = $(this).val();
 		var movieId = $(this).attr('id').split('-')[0].replace('movies','');
 		movieApp.ratingHandler(rating, movieId);
-	}); // end movieApp.init()
-};
+	}); 
+
+	// listen for A USER to change their input
+	$('input[name=genre]').on('change', function(){
+		console.log("Changed!!");
+		var genreId = $(this).attr('data-movieid');
+		console.log(genreId);
+		movieApp.grabGenre(genreId);
+	});
+
+};// end movieApp.init()
 
 // this function will go to the movie db api and get all the config data that we require.  
 // when it finishes it will put the data it gets onto movieaApp.config
@@ -30,45 +39,54 @@ movieApp.grabConfig = function(){
 		},
 		success : function(config) {
 			movieApp.config = config;
-			movieApp.grabTopRated(); // call the next thing to do
 		}
 	}); // end config ajax, we don't need to config for every API, but this one needs it
 };
 
-movieApp.grabTopRated = function(){
-	var topRatedURL = 'http://api.themoviedb.org/3/movie/top_rated';
-	$.ajax(topRatedURL, {
+
+ 
+
+
+movieApp.grabGenre = function(genreId){
+	var genreURL = 'http://api.themoviedb.org/3/genre/'+genreId+'/movies'
+	$.ajax(genreURL,{
 		type : 'GET',
 		dataType : 'jsonp',
 		data : {
 			api_key : movieApp.api_key
 		},
 		success : function(data){
-			console.log(data);
-			// run the displayMovies method to put them on the page
 			movieApp.displayMovies(data.results);
 		}
-	}); // end top rated ajax
-};
+	});
+}; 
 
-// movieApp.adventure = function() {
-// 	var adventureURL = 'http://api.themoviedb.org/3/genre/105/movies';
-// 	$.ajax(adventureURL, {
+
+
+
+
+
+// movieApp.grabTopRated = function(){
+// 	var topRatedURL = 'http://api.themoviedb.org/3/movie/top_rated';
+// 	$.ajax(topRatedURL, {
 // 		type : 'GET',
 // 		dataType : 'jsonp',
 // 		data : {
 // 			api_key : movieApp.api_key
 // 		},
-// 		success : function(data);{
+// 		success : function(data){
 // 			console.log(data);
+// 			// run the displayMovies method to put them on the page
 // 			movieApp.displayMovies(data.results);
 // 		}
-// 	});
+// 	}); // end top rated ajax
 // };
+
 
 
 // here's a cute new way of creating html elements by using JS
 movieApp.displayMovies = function(movies){
+	$('.resultsList').empty();
 	for (var i = 0; i < movies.length; i++) {
 		var title = $('<h2>').text(movies[i].title);
 		var image = $('<img>').attr('src',movieApp.config.images.base_url + "w500" + movies[i].poster_path);
@@ -81,7 +99,7 @@ movieApp.displayMovies = function(movies){
 
 		var movieWrap = $('<div>').addClass('movie');
 		movieWrap.append(title, image, rating);
-		$('body').append(movieWrap);
+		$('.resultsList').append(movieWrap);
 
 	};
 
